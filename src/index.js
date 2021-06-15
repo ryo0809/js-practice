@@ -15,7 +15,21 @@ const onClickAdd = () => {
   const completeButton = document.createElement("button");
   completeButton.innerText = "完了";
   completeButton.addEventListener("click", () => {
-    alert("完了");
+    // 未完了のTODOから完了したTODOへ要素を移動させる
+    const completeTarget = completeButton.parentNode.parentNode;
+    document.getElementById("incomplete-list").removeChild(completeTarget);
+    const li = document.createElement("li");
+    const div = document.createElement("div");
+    div.className = "list-row";
+    const p = document.createElement("p");
+    p.className = "list-title";
+    p.innerText = completeButton.previousElementSibling.innerText;
+    const returnButton = document.createElement("button");
+    returnButton.innerText = "戻す";
+    li.appendChild(div);
+    div.appendChild(p);
+    div.appendChild(returnButton);
+    document.getElementById("complete-list").appendChild(li);
   });
 
   const deleteButton = document.createElement("button");
@@ -30,7 +44,6 @@ const onClickAdd = () => {
   div.appendChild(p);
   div.appendChild(completeButton);
   div.appendChild(deleteButton);
-  console.log(div);
   // 未完了リストに追加
   const ul = document.getElementById("incomplete-list");
   ul.appendChild(li);
