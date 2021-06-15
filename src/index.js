@@ -26,6 +26,24 @@ const onClickAdd = () => {
     p.innerText = completeButton.previousElementSibling.innerText;
     const returnButton = document.createElement("button");
     returnButton.innerText = "戻す";
+    returnButton.addEventListener("click", () => {
+      // 完了したTODOから未完了のTODOへ戻す
+      const deleteTarget = returnButton.parentNode.parentNode;
+      document.getElementById("complete-list").removeChild(deleteTarget);
+      const li = document.createElement("li");
+      const div = document.createElement("div");
+      div.className = "list-row";
+      const p = document.createElement("p");
+      p.className = "list-title";
+      p.innerText = returnButton.previousElementSibling.innerText;
+      li.appendChild(div);
+      div.appendChild(p);
+      div.appendChild(completeButton);
+      div.appendChild(deleteButton);
+      // 未完了リストに追加
+      const ul = document.getElementById("incomplete-list");
+      ul.appendChild(li);
+    });
     li.appendChild(div);
     div.appendChild(p);
     div.appendChild(returnButton);
